@@ -13,7 +13,7 @@ es.setURL('http://es-node:9200')
 ### Getting a single document based on its ID
 
 ```python
-res=json.loads(es.getSingle('agendacenter', 'annonces', entry_id))
+res=json.loads(es.getSingle('esindex', 'estype', entry_id))
 ```
 
 ### Example of a Filter/Query search
