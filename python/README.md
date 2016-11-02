@@ -50,5 +50,5 @@ es.deleteSingle('esindex', 'estype', document_id);
 ### Indexing a document
 
 ```python
-es.indexSingle('esindex', 'estype', id, data);
+es.indexSingle('esindex', 'estype', document_id, data);
 ```
