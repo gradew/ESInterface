@@ -19,7 +19,8 @@ class ESInterface {
         }
         static function searchFilter($index, $type, $filters, $sort="", $offset=0, $size=10)
         {
-                $data=array("query"=> array("filtered"=> array("filter"=> array("bool"=> array("must"=> $filters)))));
+                //$data=array("query"=> array("filtered"=> array("filter"=> array("bool"=> array("must"=> $filters)))));
+                $data=array("query"=> array("bool"=> array("filter"=> $filters)));
                 if($sort!=""){
                         $sort="sort=$sort&";
                 }
