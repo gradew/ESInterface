@@ -1,6 +1,11 @@
 <?php
 class ESInterface {
+        static $ver=5;
         static $url='';
+        static function setVersion($ver)
+        {
+                self::$ver=$ver;
+        }
         static function setURL($str)
         {
                 $lastoff=strlen($str)-1;
@@ -19,8 +24,10 @@ class ESInterface {
         }
         static function searchFilter($index, $type, $filters, $sort="", $offset=0, $size=10)
         {
-                //$data=array("query"=> array("filtered"=> array("filter"=> array("bool"=> array("must"=> $filters)))));
-                $data=array("query"=> array("bool"=> array("filter"=> $filters)));
+                if(self::$ver<5)
+                        $data=array("query"=> array("filtered"=> array("filter"=> array("bool"=> array("must"=> $filters)))));
+                else
+                        $data=array("query"=> array("bool"=> array("filter"=> $filters)));
                 if($sort!=""){
                         $sort="sort=$sort&";
                 }
@@ -36,7 +43,10 @@ class ESInterface {
         }
         static function searchMixed($index, $type, $filters, $queries, $sort="", $from=0, $size=10)
         {
-                $data=array("query"=> array("filtered"=> array("filter"=> array("bool"=> array("must"=> $filters)),"query"=> array("bool"=> array("must"=> $queries)))));
+                if(self::$ver<5)
+                        $data=array("query"=> array("filtered"=> array("filter"=> array("bool"=> array("must"=> $filters)),"query"=> array("bool"=> array("must"=> $queries)))));
+                else
+                        $data=array("query"=> array("bool"=> array("must"=> $queries, "filter" => $filters)));
                 if($sort!=""){
                         $sort="sort=$sort&";
                 }
